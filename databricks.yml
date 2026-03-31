@@ -1,0 +1,31 @@
+bundle:
+  name: gateway-scheduler
+
+include:
+  - resources/*.yml
+
+variables:
+  pipeline_id:
+    description: "The Lakeflow Connect pipeline ID"
+  host:
+    description: "Databricks workspace host"
+
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: https://adb-7405606116379009.9.azuredatabricks.net/
+    variables:
+      pipeline_id: "29142200-4f9a-429e-9c63-1a57fddf967e"
+      host: "adb-7405606116379009.9.azuredatabricks.net/"
+
+  prod:
+    mode: production
+    workspace:
+      host: https://adb-7405606653490162.2.azuredatabricks.net/
+    run_as:
+      service_principal_name: "<your-sp>"
+    variables:
+      pipeline_id: "29142200-4f9a-429e-9c63-1a57fddf967e"
+      host: "adb-7405606653490162.2.azuredatabricks.net/"

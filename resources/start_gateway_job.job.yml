@@ -1,0 +1,28 @@
+resources:
+  jobs:
+    start_gateway_job:
+      name: Start Gateway Job
+      tasks:
+        - task_key: start-gateway
+          email_notifications: {}
+          notebook_task:
+            base_parameters:
+              host: ${var.host}
+              pipeline_id: ${var.pipeline_id}
+            notebook_path: ../src/Start Notebook.ipynb
+            source: WORKSPACE
+          run_if: ALL_SUCCESS
+          timeout_seconds: 0
+          webhook_notifications: {}
+      email_notifications:
+        no_alert_for_skipped_runs: false
+      max_concurrent_runs: 1
+      performance_target: PERFORMANCE_OPTIMIZED
+      queue:
+        enabled: true
+      schedule:
+        pause_status: UNPAUSED
+        quartz_cron_expression: 14 42 16 * * ?
+        timezone_id: America/Costa_Rica
+      timeout_seconds: 0
+      webhook_notifications: {}
